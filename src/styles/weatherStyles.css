@@ -1,28 +1,36 @@
+/* src/styles/weatherStyles.css */
+
+/* --- Estilos Globales --- */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-smoothing: grayscale;
+    color: #fff;
 }
 
-/* El contenedor principal de nuestra aplicación */
-.app-container {
+#root {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-    position: relative;
-    /* Clave para el posicionamiento del z-index */
-    z-index: 1;
-    /* Asegura que el contenido esté por encima del fondo por defecto */
+    padding: 20px 0;
 }
 
-/* El canvas de tsParticles se posicionará aquí. Le damos un z-index
-   bajo para que quede detrás de todo. */
+/* --- Contenedores Principales --- */
+.app-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #tsparticles {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -30,100 +38,170 @@ body {
     z-index: -1;
 }
 
-/* La tarjeta central con la información. No cambia mucho */
-.weather-box {
-    background: rgba(255, 255, 255, 0.7);
-    /* Hacemos el fondo un poco más opaco para legibilidad */
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    width: 100%;
-    max-width: 500px;
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    max-width: 550px;
+    z-index: 1;
 }
 
-/* El resto de los estilos se mantienen casi igual */
-h1 {
+.weather-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+/* --- Caja de Búsqueda --- */
+.search-box h1 {
+    margin-top: 0;
     font-size: 2rem;
 }
 
-form {
+.search-box form {
     display: flex;
+    justify-content: center;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
-input[type="text"] {
-    flex: 1;
-    padding: 12px;
+.search-box input {
+    padding: 10px 15px;
+    border-radius: 20px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
+    font-size: 1rem;
+    width: 70%;
 }
 
-button {
-    padding: 12px 20px;
-    background-color: #007bff;
-    color: #fff;
+.search-box button {
+    padding: 10px 20px;
+    border-radius: 20px;
     border: none;
-    border-radius: 8px;
+    background-color: #4682b4;
+    color: white;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #0056b3;
+.search-box button:hover {
+    background-color: #5a9bd3;
 }
 
-button:disabled {
-    background-color: #999;
+.search-box button:disabled {
+    background-color: #888;
     cursor: not-allowed;
 }
 
-.weather-info h2 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+/* --- Caja de Resultados --- */
+.result-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.error-message {
+    color: #ffcccc;
+    font-weight: bold;
+}
+
+.main-info h2 {
+    font-size: 2.5rem;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    flex-wrap: wrap;
 }
 
 .country-flag {
-    width: 35px;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.local-time {
+    font-size: 1.2rem;
+    color: #ddd;
 }
 
 .temperature {
     font-size: 4rem;
-    font-weight: 700;
+    font-weight: bold;
     margin: 10px 0;
-    color: #1a1a1a;
 }
 
 .weather-condition {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     text-transform: capitalize;
+}
+
+.weather-condition p {
+    margin: 0;
     font-size: 1.2rem;
-    gap: 5px;
 }
 
-.weather-condition img {
-    width: 50px;
-    height: 50px;
+/* --- Grilla de Detalles --- */
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 20px;
 }
 
-.error-message {
-    color: #d32f2f;
-    margin-top: 1rem;
+.detail-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.detail-text {
+    text-align: left;
+}
+
+.detail-text strong {
+    font-size: 0.9rem;
+    color: #ccc;
+    font-weight: normal;
+}
+
+.detail-text p {
+    font-size: 1.2rem;
     font-weight: bold;
+    margin: 0;
+}
+
+.detail-icon {
+    font-size: 2.5rem;
+    color: #a7d4ff;
+}
+
+/* --- Animación de Clima --- */
+.weather-animation-container {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 10;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 480px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .detail-item {
+        justify-content: flex-start;
+        padding-left: 10%;
+    }
 }
