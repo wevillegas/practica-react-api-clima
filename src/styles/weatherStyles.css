@@ -1,3 +1,5 @@
+/* src/styles/weatherStyles.css */
+
 /* --- Estilos Globales --- */
 body {
     margin: 0;
@@ -35,6 +37,7 @@ body {
 }
 
 .page-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -44,7 +47,6 @@ body {
     margin-top: 20px;
 }
 
-
 .content-wrapper {
     display: flex;
     flex-direction: column;
@@ -52,7 +54,6 @@ body {
     width: 100%;
 }
 
-/* --- Barra de Clima Local --- */
 .local-weather-bar {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 10px 25px;
@@ -99,7 +100,6 @@ body {
     font-weight: bold;
 }
 
-/* --- Estilos de Cajas de Búsqueda y Resultado --- */
 .weather-box {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 25px;
@@ -197,7 +197,6 @@ body {
     font-size: 1.2rem;
 }
 
-/* --- Grilla de Detalles con Iconos --- */
 .details-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -236,16 +235,15 @@ body {
     color: #a7d4ff;
 }
 
-/* --- Animación de Clima --- */
 .weather-animation-container {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 0px;
+    right: 10px;
     z-index: 10;
 }
 
 /* --- Media Queries --- */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .local-weather-bar {
         flex-direction: column;
         gap: 10px;
@@ -253,6 +251,12 @@ body {
 
     .local-time-info {
         align-items: center;
+    }
+
+    /* --- MODIFICACIÓN CLAVE --- */
+    /* Ocultamos el icono de animación en pantallas pequeñas para evitar superposiciones */
+    .weather-animation-container {
+        display: none;
     }
 }
 
