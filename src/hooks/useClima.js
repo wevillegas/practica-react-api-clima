@@ -19,7 +19,6 @@ export function useClima() {
         setDataClima(null);
         
         try {
-            // 1. Obtener coordenadas (lat, lon)
             const geoResponse = await fetch(`${urlBaseGeocoding}?q=${ciudad}&limit=1&appid=${API_KEY}`);
             const geoData = await geoResponse.json();
 
@@ -27,21 +26,21 @@ export function useClima() {
                 throw new Error('Ciudad no encontrada. Por favor, intenta de nuevo.');
             }
 
-            const { lat, lon, name, country } = geoData[0];
+            // ---- MODIFICACIÓN 1: Extraemos "state" ----
+            const { lat, lon, name, country, state } = geoData[0];
 
-            // 2. Obtener los datos principales del clima con el endpoint /weather
             const weatherResponse = await fetch(`${urlBaseWeather}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=es`);
             const weatherData = await weatherResponse.json();
 
-            // 3. Obtener el índice UV con el endpoint /uvi
             const uvResponse = await fetch(`${urlBaseUv}?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
             const uvData = await uvResponse.json();
 
-            // 4. Combinar toda la información en un solo objeto
             const finalData = {
                 ...weatherData,
                 name: name,
                 country: country,
+                // ---- MODIFICACIÓN 2: Añadimos "state" al objeto final ----
+                state: state, 
                 uvi: uvData.value 
             };
             
