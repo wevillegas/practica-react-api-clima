@@ -6,7 +6,7 @@ export const LocalWeather = () => {
     const [error, setError] = useState(null);
     const [currentTime, setCurrentTime] = useState(new Date());
 
-    const API_KEY = "56608a5f542d57b91786b571e9c481c3";
+    const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;;
 
     useEffect(() => {
 
