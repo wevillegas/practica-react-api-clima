@@ -1,5 +1,3 @@
-// src/components/LocalWeather.jsx
-
 import React, { useState, useEffect } from 'react';
 import { MdLocationOn } from 'react-icons/md';
 
@@ -11,10 +9,9 @@ export const LocalWeather = () => {
     const API_KEY = "56608a5f542d57b91786b571e9c481c3";
 
     useEffect(() => {
-        // --- Lógica actualizada para obtener ubicación y clima ---
+
         const fetchLocalData = async (lat, lon) => {
             try {
-                // ---- NUEVO PASO 1: Geocodificación Inversa para obtener el nombre y el estado ----
                 const geoUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`;
                 const geoResponse = await fetch(geoUrl);
                 const geoData = await geoResponse.json();
@@ -30,7 +27,7 @@ export const LocalWeather = () => {
                 const weatherResponse = await fetch(weatherUrl);
                 const weatherData = await weatherResponse.json();
 
-                // ---- NUEVO PASO 3: Combinar los datos ----
+                // ---- PASO 3: Combinar los datos ----
                 const finalData = {
                     ...weatherData,
                     name: name,     // Usamos el nombre de la geocodificación (más preciso)
@@ -99,7 +96,7 @@ export const LocalWeather = () => {
                 />
                 <span>{Math.round(localData.main.temp)}°C</span>
                 <MdLocationOn />
-                {/* ---- MODIFICACIÓN FINAL: Mostramos el estado ---- */}
+                {/* ---- Mostramos el estado ---- */}
                 <span>{localData.name}, {localData.state && `${localData.state}, `}{localData.country}</span>
             </div>
             <div className="local-time-info">

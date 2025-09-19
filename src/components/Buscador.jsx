@@ -1,4 +1,3 @@
-// src/components/Buscador.jsx
 import React from 'react';
 
 export const Buscador = ({ ciudad, setCiudad, onBuscar, loading }) => {

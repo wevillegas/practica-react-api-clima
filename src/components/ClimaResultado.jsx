@@ -1,5 +1,3 @@
-// src/components/ClimaResultado.jsx
-
 import React from 'react';
 import { WiHumidity, WiStrongWind } from 'react-icons/wi';
 import { BsEye, BsSun } from 'react-icons/bs';
@@ -24,7 +22,7 @@ export const ClimaResultado = ({ data, error }) => {
         );
     }
 
-    // ---- MODIFICACIÓN 3: Extraemos "state" de los props ----
+
     const { name, country, state, main, visibility, weather, wind, timezone, uvi } = data;
     const { temp, humidity } = main;
     const { description, icon } = weather[0];
@@ -33,7 +31,6 @@ export const ClimaResultado = ({ data, error }) => {
         <div className="weather-box result-box">
             <div className="main-info">
                 <h2>
-                    {/* ---- MODIFICACIÓN 4: Mostramos el estado si existe ---- */}
                     {name}, {state && `${state}, `}{country}
                     <img
                         src={`https://flagcdn.com/w40/${country.toLowerCase()}.png`}
